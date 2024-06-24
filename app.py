@@ -17,12 +17,9 @@ def parse_markdown_to_html(markdown_text):
     markdown_text = re.sub(r'(?s)(<li>.*?</li>)', r'<ul>\1</ul>', markdown_text)
     markdown_text = re.sub(r'(?s)(</ul>\s*<ul>)', '', markdown_text)
 
-    markdown_text = re.sub(r'(?s)(<h\d>.*?</h\d>)', r'\1\n\n', markdown_text)
-    markdown_text = re.sub(r'(?s)(<pre>.*?</pre>)', r'\1\n\n', markdown_text)
-    markdown_text = re.sub(r'(?s)(<ul>.*?</ul>)', r'\1\n\n', markdown_text)
     paragraphs = markdown_text.split('\n\n')
     paragraphs = [f'<p>{p}</p>' if not re.match(r'<(h\d|ul|pre|li|b|i|code)', p) else p for p in paragraphs]
-    markdown_text = '\n\n'.join(paragraphs)
+    markdown_text = '\n'.join(paragraphs)
 
     return markdown_text
 
