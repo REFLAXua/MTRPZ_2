@@ -37,6 +37,15 @@ def parse_markdown_to_ansi(markdown_text):
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'• \1', markdown_text)
 
     markdown_text = markdown_text.strip()
+
+    lines = markdown_text.split('\n')
+    cleaned_lines = []
+    for i in range(len(lines)):
+        if lines[i].strip() == '' and (i == 0 or lines[i-1].strip() == '' or (i+1 < len(lines) and lines[i+1].strip() == '')):
+            continue
+        cleaned_lines.append(lines[i])
+    markdown_text = '\n'.join(cleaned_lines)
+
     return markdown_text
 
 def convert_markdown(input_data, output_path=None, format='ansi', is_text=False):
