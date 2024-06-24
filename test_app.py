@@ -1,6 +1,7 @@
 import unittest
 import tempfile
 import os
+import sys
 from app import parse_markdown_to_html, parse_markdown_to_ansi, convert_markdown
 
 class TestMarkdownConverter(unittest.TestCase):
@@ -8,7 +9,7 @@ class TestMarkdownConverter(unittest.TestCase):
     def setUp(self):
         self.test_markdown = "# Заголовок 1\n\nЦе **жирний текст** і це _курсив_.\n\n- Пункт 1\n- Пункт 2\n\n```python\nprint(\"Це код Python\")\n```"
         self.expected_html = "<h1>Заголовок 1</h1>\n\n<p>Це <b>жирний текст</b> і це <i>курсив</i>.</p>\n\n<ul><li>Пункт 1</li><li>Пункт 2</li></ul>\n\n<pre><code>python\nprint(\"Це код Python\")\n</code></pre>"
-        self.expected_ansi = "\033[1m\033[4mЗаголовок 1\033[0m\n\nЦе \033[1mжирний текст\033[0m і це \033[3мкурсив\033[0m.\n\n• Пункт 1\n• Пункт 2\n\n\033[7mpython\nprint(\"Це код Python\")\033[0m"
+        self.expected_ansi = "\033[1m\033[4mЗаголовок 1\033[0m\n\nЦе \033[1mжирний текст\033[0m і це \033[3mкурсив\033[0m.\n\n• Пункт 1\n• Пункт 2\n\n\033[7mpython\nprint(\"Це код Python\")\033[0m"
 
     def test_parse_markdown_to_html(self):
         html_output = parse_markdown_to_html(self.test_markdown)
