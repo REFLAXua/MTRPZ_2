@@ -41,15 +41,18 @@ def parse_markdown_to_ansi(markdown_text):
 
     return markdown_text
 
-def convert_markdown(input_path, output_path=None, format='ansi'):
-    if not os.path.isfile(input_path):
-        raise FileNotFoundError(f"error: file '{input_path}' does not exist")
+def convert_markdown(input_data, output_path=None, format='ansi', is_text=False):
+    if not is_text:
+        if not os.path.isfile(input_data):
+            raise FileNotFoundError(f"error: file '{input_data}' does not exist")
 
-    try:
-        with open(input_path, 'r') as file:
-            markdown_content = file.read()
-    except Exception as e:
-        raise IOError(f"error with reading file '{input_path}': {e}")
+        try:
+            with open(input_data, 'r') as file:
+                markdown_content = file.read()
+        except Exception as e:
+            raise IOError(f"error with reading file '{input_data}': {e}")
+    else:
+        markdown_content = input_data
 
     try:
         if format == 'html':

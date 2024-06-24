@@ -1,7 +1,6 @@
 import unittest
 import tempfile
 import os
-import sys
 from app import parse_markdown_to_html, parse_markdown_to_ansi, convert_markdown
 
 class TestMarkdownConverter(unittest.TestCase):
@@ -21,7 +20,7 @@ class TestMarkdownConverter(unittest.TestCase):
 
     def test_convert_markdown_to_html_file(self):
         with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            convert_markdown(self.test_markdown, tmp_file.name, 'html')
+            convert_markdown(self.test_markdown, tmp_file.name, 'html', is_text=True)
             with open(tmp_file.name, 'r') as file:
                 html_output = file.read()
                 self.assertEqual(html_output.strip(), self.expected_html.strip())
@@ -29,8 +28,9 @@ class TestMarkdownConverter(unittest.TestCase):
 
     def test_convert_markdown_to_ansi_stdout(self):
         from io import StringIO
+        import sys
         sys.stdout = StringIO()
-        convert_markdown(self.test_markdown, format='ansi')
+        convert_markdown(self.test_markdown, format='ansi', is_text=True)
         ansi_output = sys.stdout.getvalue().strip()
         sys.stdout = sys.__stdout__
         self.assertEqual(ansi_output, self.expected_ansi.strip())
