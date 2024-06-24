@@ -36,8 +36,6 @@ def parse_markdown_to_ansi(markdown_text):
 
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'• \1', markdown_text)
 
-    markdown_text = markdown_text.strip()
-
     lines = markdown_text.split('\n')
     cleaned_lines = []
     for i in range(len(lines)):
