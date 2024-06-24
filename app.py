@@ -36,6 +36,7 @@ def parse_markdown_to_ansi(markdown_text):
 
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'• \1', markdown_text)
 
+    markdown_text = markdown_text.strip()
     return markdown_text
 
 def convert_markdown(input_data, output_path=None, format='ansi', is_text=False):
