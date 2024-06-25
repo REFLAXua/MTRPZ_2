@@ -38,3 +38,7 @@
     ```sh
     python app.py /path/to/invalid/markdown.md
     ```
+
+    
+tests can be useful and I need to learn how to use them, at least because I've been told at work that I'll have to use them sooner or later. 
+Unfortunately, I was unable to implement the tests in this repository
