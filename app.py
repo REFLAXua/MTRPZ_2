@@ -16,7 +16,6 @@ def parse_markdown_to_html(markdown_text):
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'<li>\1</li>', markdown_text)
     markdown_text = re.sub(r'(?s)(<li>.*?</li>)', r'<ul>\1</ul>', markdown_text)
     markdown_text = re.sub(r'(?s)(</ul>\s*<ul>)', '', markdown_text)
-
     paragraphs = markdown_text.split('\n\n')
     paragraphs = [f'<p>{p}</p>' if not re.match(r'<(h\d|ul|pre|li|b|i|code)', p) else p for p in paragraphs]
     markdown_text = '\n'.join(paragraphs)
@@ -33,7 +32,6 @@ def parse_markdown_to_ansi(markdown_text):
 
     markdown_text = re.sub(r'```(.*?)```', r'\033[7m\1\033[0m', markdown_text, flags=re.DOTALL)
     markdown_text = re.sub(r'`(.*?)`', r'\033[7m\1\033[0m', markdown_text)
-
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'• \1', markdown_text)
 
     markdown_text = re.sub(r'\n\s*\n', '\n', markdown_text).strip()
