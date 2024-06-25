@@ -36,7 +36,7 @@ def parse_markdown_to_ansi(markdown_text):
 
     markdown_text = re.sub(r'(?m)^- (.*?)$', r'• \1', markdown_text)
 
-    markdown_text = re.sub(r'\n\s*\n', '\n', markdown_text)
+    markdown_text = re.sub(r'\n\s*\n', '\n', markdown_text).strip()
 
     return markdown_text
 
